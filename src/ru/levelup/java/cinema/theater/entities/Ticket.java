@@ -2,11 +2,10 @@ package ru.levelup.java.cinema.theater.entities;
 
 public class Ticket {
     private int place;
-    private Session session;
 
-    public Ticket(int place, Session session) {
+
+    public Ticket(int place) {
         this.place = place;
-        this.session = session;
     }
 
     public int getPlace() {
@@ -17,11 +16,5 @@ public class Ticket {
         this.place = place;
     }
 
-    public Session getSession() {
-        return session;
-    }
 
-    public void setSession(Session session) {
-        this.session = session;
-    }
 }

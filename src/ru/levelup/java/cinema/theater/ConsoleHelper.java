@@ -17,10 +17,12 @@ public class ConsoleHelper {
         //BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
 
         int value = -1;
-        try( Scanner scanner = new Scanner(System.in)) {
-            value = scanner.nextInt();
-        }
-        //scanner.close();
+        Scanner scanner = new Scanner(System.in);
+        value = scanner.nextInt();
+
+        // !!! когда закрывается scanner он закрывает System.in и повторно сосчитать уже не получается
+        // НЕ ЗАКРЫВАТЬ SCANNER
+        // When a Scanner is closed, it will close its input source if the source implements the Closeable interface.
         return value;
 
     }

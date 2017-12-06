@@ -16,5 +16,10 @@ public class Ticket {
         this.place = place;
     }
 
-
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                place +
+                "}\n";
+    }
 }

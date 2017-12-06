@@ -1,5 +1,6 @@
 package ru.levelup.java.cinema.theater.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
@@ -8,6 +9,15 @@ public class Movie {
     private String title;
     private int duration;
     private String description;
+
+
+
+    public Movie(String title, int duration, String description) {
+        this.sessions = new ArrayList<Session>();
+        this.title = title;
+        this.duration = duration;
+        this.description = description;
+    }
 
     public Movie(List<Session> sessions, String title, int duration, String description) {
         this.sessions = sessions;
@@ -53,6 +63,24 @@ public class Movie {
         return "title='" + title + '\'' +
                 ", duration=" + duration +
                 ", description='" + description + '\'' +
-                ", sessions=" + sessions;
+                ", sessions= \n" + sessions;
+    }
+
+    /**
+     * Добавление сеанса с проверкой повтора сеанса в имеющемся наборе
+     * @param session Структура "сеанс" с билетами
+     */
+    public void  addSession(Session session) {
+        boolean newSession = true;
+
+        for (Session ses: sessions) {
+            if (ses.getHall().getName().equals(session.getHall().getName()) && ses.getStartTime().toString().equals(session.getStartTime().toString())) {
+                ses.getTickets().addAll(session.getTickets());
+                newSession = false;
+            }
+        }
+        if (newSession) {
+            sessions.add(session);
+        }
     }
 }

@@ -28,4 +28,12 @@ public class Hall {
     public void setAmountOfPlace(int amountOfPlace) {
         this.amountOfPlace = amountOfPlace;
     }
+
+    @Override
+    public String toString() {
+        return "Hall{" +
+                "name='" + name + '\'' +
+                ", amountOfPlace=" + amountOfPlace +
+                '}';
+    }
 }

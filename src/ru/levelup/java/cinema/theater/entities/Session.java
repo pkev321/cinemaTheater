@@ -62,7 +62,24 @@ public class Session {
         }
     }
 
+    public void saleTicket(int count)
+    {
+        for (int i = 0; i < count; i++) {
+            tickets.add(new Ticket(tickets.size()));
+        }
+    }
+
     public int getAmountOfAvailablePlaces() {
         return hall.getAmountOfPlace() - tickets.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "hall=" + hall +
+                ", startTime=" + startTime +
+                ", price=" + price +
+                ", AmountOfAvailablePlaces=" + getAmountOfAvailablePlaces() +
+                "}\n";
     }
 }

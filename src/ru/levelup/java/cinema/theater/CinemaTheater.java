@@ -1,10 +1,7 @@
 package ru.levelup.java.cinema.theater;
 
 import javafx.application.Application;
-import ru.levelup.java.cinema.theater.entities.Hall;
-import ru.levelup.java.cinema.theater.entities.Movie;
-import ru.levelup.java.cinema.theater.entities.Session;
-import ru.levelup.java.cinema.theater.entities.Ticket;
+import ru.levelup.java.cinema.theater.entities.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +21,8 @@ public class CinemaTheater {
 
     private ConsoleHelper consoleHelper;
     private List<Movie> movies;
+    private List<Food> menu;
+    private List<Integer> order;
 
     /**
      * Точка входа
@@ -32,6 +31,7 @@ public class CinemaTheater {
         CinemaTheater cinemaTheater = new CinemaTheater();
         cinemaTheater.consoleHelper = new ConsoleHelper();
         cinemaTheater.readData();
+        cinemaTheater.readBarMenu();
         cinemaTheater.initMenu();
 
     }
@@ -55,6 +55,7 @@ public class CinemaTheater {
                 ticketSelling();
                 break;
             case(3):
+                barInformation();
                 break;
             case(0):
                 return;
@@ -63,8 +64,6 @@ public class CinemaTheater {
         }
         // рекурсия
         initMenu();
-
-
     }
 
     /**
@@ -74,6 +73,65 @@ public class CinemaTheater {
 
         for (Movie movie : movies ) {
             consoleHelper.printlnToConsole(movie);
+        }
+    }
+
+    private void barInformation() {
+        int count = 1;
+        consoleHelper.printlnToConsole("Выберите что будете брать (0 - отмена)");
+        for (Food food: menu ) {
+            consoleHelper.printToConsole(count + "  : ");
+            consoleHelper.printlnToConsole(food);
+            count++;
+        }
+        buyFood();
+    }
+
+    /**
+     * Чтение меню бара
+     */
+    private void readBarMenu() {
+        menu = new ArrayList<Food>();
+
+        final String FILE_NAME = "res/barMenu.txt"; // Файл содержащий меню бара
+
+        try {
+
+            Scanner sc = new Scanner(new File(FILE_NAME)).useDelimiter(";");
+
+            while (sc.hasNext()) {
+                String name = sc.next().trim();
+                double price = sc.nextDouble();
+                Food food = new Food(name, price);
+                menu.add(food);
+            }
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Процедура покупки еды
+     */
+    private void buyFood() {
+        consoleHelper.printlnToConsole("Что вы будите заказывать?");
+
+        int numPosition = consoleHelper.getIntValueFromConsole();
+        if (numPosition == 0 || numPosition > menu.size())
+            return;
+        double price = menu.get(numPosition-1).getPrice();
+        consoleHelper.printlnToConsole("С Вас " + price + " зайчиков.");
+
+        int bunnies = consoleHelper.getIntValueFromConsole();
+
+        if (bunnies < price)
+            consoleHelper.printlnToConsole("Скупой повторяет ввод, повторите. \n");
+        if (bunnies == price)
+            consoleHelper.printlnToConsole("Ok! \n Приятного аппетита!\n \n ");
+        if (bunnies > price) {
+            consoleHelper.printlnToConsole("Приятного аппетита! \n Сдачу получите на выходе из зала ...\n \n ");
         }
     }
 
@@ -187,8 +245,10 @@ public class CinemaTheater {
 
         if (bunnies < price)
             consoleHelper.printlnToConsole("Скупой повторяет ввод, повторите. \n");
-        if (bunnies == price)
+        if (bunnies == price) {
             consoleHelper.printlnToConsole("Ok!");
+            movies.get(movNumber).getSessions().get(sesNumber).saleTicket(needTickets);
+        }
         if (bunnies > price) {
             consoleHelper.printlnToConsole("Сдачу получите на выходе из зала ...");
             movies.get(movNumber).getSessions().get(sesNumber).saleTicket(needTickets);

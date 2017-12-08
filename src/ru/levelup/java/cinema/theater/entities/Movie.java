@@ -60,10 +60,10 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "title='" + title + '\'' +
-                ", duration=" + duration +
-                ", description='" + description + '\'' +
-                ", sessions= \n" + sessions;
+        return "Наименование='" + title + '\'' +
+                ", Длительность=" + duration +
+                ", Описание='" + description + '\'' +
+                ", Сеансы= \n" + sessions;
     }
 
     /**

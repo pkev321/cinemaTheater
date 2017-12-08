@@ -14,8 +14,6 @@ public class ConsoleHelper {
     }
 
     public int getIntValueFromConsole(){
-        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in))
-
         int value = -1;
         Scanner scanner = new Scanner(System.in);
         value = scanner.nextInt();

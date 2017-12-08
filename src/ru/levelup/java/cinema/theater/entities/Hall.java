@@ -31,9 +31,9 @@ public class Hall {
 
     @Override
     public String toString() {
-        return "Hall{" +
-                "name='" + name + '\'' +
-                ", amountOfPlace=" + amountOfPlace +
+        return "Зал{" +
+                "Наименование='" + name + '\'' +
+                ", Доступное число мест=" + amountOfPlace +
                 '}';
     }
 }

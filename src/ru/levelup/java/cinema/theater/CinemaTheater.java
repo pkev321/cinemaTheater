@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ *  Класс описывает работу терминала продаж в кинозале
+ */
 public class CinemaTheater {
 
     private ConsoleHelper consoleHelper;
@@ -142,7 +145,7 @@ public class CinemaTheater {
     private void ticketSelling() {
         consoleHelper.printlnToConsole("");
         // выбор фильма
-        consoleHelper.printlnToConsole("Select number of move:");
+        consoleHelper.printlnToConsole("Укажите номер фильма который Вы хотели бы посмотреть:");
         int i = 0;
         for (Movie mov : movies) {
             consoleHelper.printlnToConsole( i + " :" + mov.getTitle() + ";" );
@@ -150,48 +153,49 @@ public class CinemaTheater {
         }
         int movNumber = consoleHelper.getIntValueFromConsole();
         if (movNumber > movies.size()-1 || movNumber < 0 ) {
-            consoleHelper.printlnToConsole("Wrong choice.");
+            consoleHelper.printlnToConsole("Неправильный выбор, повторите. \n");
             return;
         }
 
         // selection session
-        consoleHelper.printlnToConsole("Select number of session:");
+        consoleHelper.printlnToConsole("Выберите номер сеанса:");
         int i2 = 0;
         for (Session ses : movies.get(movNumber).getSessions()) {
-            consoleHelper.printlnToConsole( i2 + " : Hall[" + ses.getHall() + "] Time[" + ses.getStartTime() + "] Available number of places = " + ses.getAmountOfAvailablePlaces() + ";" );
+            consoleHelper.printlnToConsole( i2 + " : Зал[" + ses.getHall() + "] Время[" + ses.getStartTime() + "] Доступное количество мест = " + ses.getAmountOfAvailablePlaces() + ";" );
             i2++;
         }
         int sesNumber = consoleHelper.getIntValueFromConsole();
         if (sesNumber > movies.get(movNumber).getSessions().size()-1 || movNumber < 0 ) {
-            consoleHelper.printlnToConsole("Wrong choice.");
+            consoleHelper.printlnToConsole("Неправильный выбор, повторите. \n");
             return;
         }
 
         // selection amount of tickets
         int amountOfAvailablePlaces = movies.get(movNumber).getSessions().get(sesNumber).getAmountOfAvailablePlaces();
-        consoleHelper.printlnToConsole("How many tickets do you need? (Available only " + amountOfAvailablePlaces + "  places)");
+        consoleHelper.printlnToConsole("Сколько билетов Вам надо? (Доступно только " + amountOfAvailablePlaces + "  мест)");
         int needTickets = consoleHelper.getIntValueFromConsole();
 
         if (needTickets > amountOfAvailablePlaces) {
-            consoleHelper.printlnToConsole("The auditorium is not rubber.");
+            consoleHelper.printlnToConsole("Зал не резиновый.");
+            consoleHelper.printlnToConsole("Неправильный выбор, повторите. \n");
             return;
         }
 
         double price = needTickets * movies.get(movNumber).getSessions().get(sesNumber).getPrice();
-        consoleHelper.printlnToConsole("Give me your money!!!  not less than " + price + "  bunnies!");
+        consoleHelper.printlnToConsole("Дайте мне денег побольше!!!  (не менее " + price + "  зайчиков)");
         int bunnies = consoleHelper.getIntValueFromConsole();
 
         if (bunnies < price)
-            consoleHelper.printlnToConsole("Not enough!");
+            consoleHelper.printlnToConsole("Скупой повторяет ввод, повторите. \n");
         if (bunnies == price)
             consoleHelper.printlnToConsole("Ok!");
         if (bunnies > price) {
-            consoleHelper.printlnToConsole("I will give you surrender  late......................");
+            consoleHelper.printlnToConsole("Сдачу получите на выходе из зала ...");
             movies.get(movNumber).getSessions().get(sesNumber).saleTicket(needTickets);
         }
         consoleHelper.printlnToConsole("");
         consoleHelper.printlnToConsole("");
-        consoleHelper.printlnToConsole("FREE TERMINAL !!!");
+        consoleHelper.printlnToConsole("СВОБОДНЫЙ ТЕРМИНАЛ !!!");
         consoleHelper.printlnToConsole("");
         consoleHelper.printlnToConsole("");
     }

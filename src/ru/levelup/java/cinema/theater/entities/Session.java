@@ -1,5 +1,7 @@
 package ru.levelup.java.cinema.theater.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,11 +77,15 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session{" +
-                "hall=" + hall +
-                ", startTime=" + startTime +
-                ", price=" + price +
-                ", AmountOfAvailablePlaces=" + getAmountOfAvailablePlaces() +
+        // форматируем строку
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        String sStartTime = df.format(startTime);
+
+        return "Сеанс{" +
+                "Зал=" + hall +
+                ", Время начала=" + sStartTime +
+                ", Цена=" + price +
+                ", Доступно мест=" + getAmountOfAvailablePlaces() +
                 "}\n";
     }
 }

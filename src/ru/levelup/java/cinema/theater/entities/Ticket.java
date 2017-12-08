@@ -18,7 +18,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
+        return "Билет{" +
                 place +
                 "}\n";
     }

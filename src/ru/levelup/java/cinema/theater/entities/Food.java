@@ -1,5 +1,9 @@
 package ru.levelup.java.cinema.theater.entities;
 
+/**
+ * Клас описывающий единицу бара
+ */
+
 public class Food {
     private String name;
     private double price;

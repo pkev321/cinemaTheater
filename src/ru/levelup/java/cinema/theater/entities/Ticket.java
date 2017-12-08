@@ -1,8 +1,10 @@
 package ru.levelup.java.cinema.theater.entities;
 
+/**
+ * Класс описывающий билет
+ */
 public class Ticket {
     private int place;
-
 
     public Ticket(int place) {
         this.place = place;

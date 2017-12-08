@@ -25,8 +25,10 @@ public class CinemaTheater {
     private ConsoleHelper consoleHelper;
     private List<Movie> movies;
 
+    /**
+     * Точка входа
+     */
     public static void main(String[] args) {
-
         CinemaTheater cinemaTheater = new CinemaTheater();
         cinemaTheater.consoleHelper = new ConsoleHelper();
         cinemaTheater.readData();
@@ -71,7 +73,7 @@ public class CinemaTheater {
     private void sessionInformation() {
 
         for (Movie movie : movies ) {
-            consoleHelper.printlnToConsole(movie.toString());
+            consoleHelper.printlnToConsole(movie);
         }
     }
 
@@ -81,9 +83,8 @@ public class CinemaTheater {
     private void readData() {
         movies = new ArrayList<Movie>();
 
+        final String FILE_NAME = "res/settings.txt"; // Файл содержащий структуру данных
         //Data struct in file settings: title;duration;description;session{startTime;price;Hall{name,amountOfPlace};Ticket{place}}
-
-        final String FILE_NAME = "res/settings.txt";
         try {
 
             Scanner sc = new Scanner(new File(FILE_NAME)).useDelimiter(";");
@@ -113,7 +114,6 @@ public class CinemaTheater {
                 Movie movie = new Movie(movTitle, movDurat, movDesc);
                 movie.getSessions().add(session);
                 addMovie(movie);
-                //System.out.println(movie);
             }
             sc.close();
         }

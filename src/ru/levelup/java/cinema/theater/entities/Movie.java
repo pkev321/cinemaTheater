@@ -3,14 +3,16 @@ package ru.levelup.java.cinema.theater.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс описывающий кино
+ */
+
 public class Movie {
 
     private List<Session> sessions;
     private String title;
     private int duration;
     private String description;
-
-
 
     public Movie(String title, int duration, String description) {
         this.sessions = new ArrayList<Session>();

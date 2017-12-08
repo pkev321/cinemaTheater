@@ -1,9 +1,10 @@
 package ru.levelup.java.cinema.theater;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ * Класс обеспечивающий взаимодействие с пользователем
+ */
 public class ConsoleHelper {
     public  void printToConsole(String message){
         System.out.print(message);
@@ -11,6 +12,10 @@ public class ConsoleHelper {
 
     public  void printlnToConsole(String message){
         System.out.println(message);
+    }
+
+    public  void printlnToConsole(Object obj){
+        System.out.println(obj.toString());
     }
 
     public int getIntValueFromConsole(){

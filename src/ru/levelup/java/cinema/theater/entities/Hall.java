@@ -1,5 +1,8 @@
 package ru.levelup.java.cinema.theater.entities;
 
+/**
+ * Класс описывающий кинозал (помещение)
+ */
 public class Hall {
     private String name;
     private int amountOfPlace;

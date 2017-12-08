@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс описывающий КмноСеанс
+ */
+
 public class Session {
     private Hall hall;
     private Date startTime;
@@ -53,17 +57,10 @@ public class Session {
         this.tickets = tickets;
     }
 
-    public void addTicket(List<Ticket> boughtTickets) {
-        int avaiblePlaces = getAmountOfAvailablePlaces();
-        if (avaiblePlaces < boughtTickets.size()) {
-            System.out.println("");
-            throw new IllegalArgumentException("");
-        }
-        if (Objects.isNull(tickets)) {
-            tickets = new ArrayList<>();
-        }
-    }
-
+    /**
+     * Продажа билетов
+     * @param count количество билетов
+     */
     public void saleTicket(int count)
     {
         for (int i = 0; i < count; i++) {
@@ -71,6 +68,10 @@ public class Session {
         }
     }
 
+    /**
+     * Получение количества доступных мест
+     * @return
+     */
     public int getAmountOfAvailablePlaces() {
         return hall.getAmountOfPlace() - tickets.size();
     }

@@ -1,15 +1,9 @@
 package ru.levelup.java.cinema.theater;
 
-import javafx.application.Application;
 import ru.levelup.java.cinema.theater.entities.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.DatabaseMetaData;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,7 +15,7 @@ public class CinemaTheater {
 
     private ConsoleHelper consoleHelper;
     private List<Movie> movies;
-    private List<Food> menu;
+    private List<Food> menuOfFood;
     private List<Integer> order;
 
     /**
@@ -79,7 +73,7 @@ public class CinemaTheater {
     private void barInformation() {
         int count = 1;
         consoleHelper.printlnToConsole("Выберите что будете брать (0 - отмена)");
-        for (Food food: menu ) {
+        for (Food food: menuOfFood) {
             consoleHelper.printToConsole(count + "  : ");
             consoleHelper.printlnToConsole(food);
             count++;
@@ -91,7 +85,7 @@ public class CinemaTheater {
      * Чтение меню бара
      */
     private void readBarMenu() {
-        menu = new ArrayList<Food>();
+        menuOfFood = new ArrayList<Food>();
 
         final String FILE_NAME = "res/barMenu.txt"; // Файл содержащий меню бара
 
@@ -103,7 +97,7 @@ public class CinemaTheater {
                 String name = sc.next().trim();
                 double price = sc.nextDouble();
                 Food food = new Food(name, price);
-                menu.add(food);
+                menuOfFood.add(food);
             }
             sc.close();
         }
@@ -119,9 +113,9 @@ public class CinemaTheater {
         consoleHelper.printlnToConsole("Что вы будите заказывать?");
 
         int numPosition = consoleHelper.getIntValueFromConsole();
-        if (numPosition == 0 || numPosition > menu.size())
+        if (numPosition == 0 || numPosition > menuOfFood.size())
             return;
-        double price = menu.get(numPosition-1).getPrice();
+        double price = menuOfFood.get(numPosition-1).getPrice();
         consoleHelper.printlnToConsole("С Вас " + price + " зайчиков.");
 
         int bunnies = consoleHelper.getIntValueFromConsole();
